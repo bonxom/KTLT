@@ -10,17 +10,22 @@ struct DangVien{
     double phucap;
 
     DangVien(){}
-    DangVien(string soThe, string ten, int ngay, int thang, int nam, string chucVu){
+    DangVien(string soThe, string ten, int luong, int ngay, int thang, int nam, string chucVu){
         this->soThe = soThe;
         this->ten = ten;
         this->ngay = ngay;
         this->thang = thang;
         this->nam = nam;
+        this->luong = luong;
         this->chucVu = chucVu;
         if (chucVu == "BiThu") phucap = luong * 0.05;
         else if (chucVu == "Pbthu") phucap = luong * 0.025;
         else if (chucVu == "Uyvien") phucap = luong * 0.015;
         else phucap = 0;
+    }
+
+    string getNgayVaoDang(){
+        return to_string(ngay) + "-" + to_string(thang) + "-" + to_string(nam);
     }
 };
 
@@ -44,7 +49,7 @@ struct ChiBo{
         cout << "   so Dang Vien: " << soDangVien << endl;
         cout << "   Tong luong: " << tongLuong << endl;
         cout << "   Dang Phi: " << dangPhi << endl;
-        cout << "   Tong DP nop cap tren: " << 0.7 * dangPhi;
+        cout << "   Tong DP nop cap tren: " << 0.7 * dangPhi << endl;
         cout << "   Tong tro cap phuc vu: " << tongPC << endl;
 
         cout << "Bang thu dang phi: \n";
@@ -52,9 +57,9 @@ struct ChiBo{
         for (DangVien &x : v){
             cout << left<< setw(8) << setfill(' ') << x.soThe;
             cout << left<< setw(11) << setfill(' ') << x.ten;
-            cout << left<< setw(15) << setfill(' ') << x.ngay << "-" <<x.thang << "-" << x.nam;
+            cout << left<< setw(16) << setfill(' ') << x.getNgayVaoDang();
             cout << left<< setw(12) << setfill(' ') << 2025 - x.nam;
-            cout << left<< setw(6) << setfill(' ') << x.chucVu;
+            cout << left<< setw(9) << setfill(' ') << x.chucVu;
             cout << left<< setw(9) << setfill(' ') << x.phucap;
             cout << left<< setw(9) << setfill(' ') << x.luong;
             cout << x.luong * 0.01; cout << endl;
@@ -77,14 +82,14 @@ void first(){
             int ngay, thang, nam, luong;
             cout << "   Dang vien thu " << i << endl;
             cout << "       So the: "; cin >> sothe;
-            cout << "       Ten dang vien: "; cin >> ten; cout << endl;
+            cout << "       Ten dang vien: "; cin.ignore();getline(cin, ten); cout << endl;
             cout << "       Ngay vao dang:\n";
             cout << "       Ngay: "; cin >> ngay;
             cout << "       Thang: "; cin >> thang;
             cout << "       Nam: "; cin >> nam; cout << endl;
             cout << "       Luong: "; cin >> luong; cout << endl;
             cout << "       Chuc vu: "; cin >> chucVu; cout << endl;
-            DangVien x(sothe, ten, ngay, thang, nam, chucVu);
+            DangVien x(sothe, ten, luong, ngay, thang, nam, chucVu);
             dsChiBo[q-1].v.push_back(x);
             dsChiBo[q-1].soDangVien++;
             dsChiBo[q-1].tongLuong += luong;
