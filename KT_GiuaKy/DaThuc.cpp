@@ -39,8 +39,8 @@ struct DaThuc{
         cout << " Da thuc: " << name << "(x) = ";
         for (int i = bac; i > 0; i--){
             if (heso[i] != 0){
-                if (abs(heso[i]) != 1) cout << heso[i];
-                cout << "*x";
+                if (abs(heso[i]) != 1) cout << heso[i] << "*";
+                cout << "x";
                 if (i != 1) cout << "^" << i;
                 if (heso[i - 1] >= 0) cout << " + ";
                 else cout << " ";
